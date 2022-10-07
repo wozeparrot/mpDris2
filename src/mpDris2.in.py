@@ -761,8 +761,7 @@ class MPDWrapper(object):
         return 'file://' + self._temp_cover.name
 
     def last_status(self):
-        if time.time() - self._time >= 2:
-            self.timer_callback()
+        self.timer_callback()
         return self._status.copy()
 
     def _update_properties(self, force=False):
@@ -771,7 +770,7 @@ class MPDWrapper(object):
         old_time = self._time
         self._currentsong = self.currentsong()
         new_status = self.status()
-        self._time = new_time = int(time.time())
+        self._time = new_time = time.time()
 
         if not new_status:
             logger.debug("_update_properties: failed to get new status")
